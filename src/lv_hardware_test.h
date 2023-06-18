@@ -33,7 +33,7 @@ int32_t battery_level_percent(void)
   mvolts = RP2040_VREF * adc_raw / (1<<12);
 #endif
   int32_t level = (mvolts - 1850) * 100 / 250; // 1850 ~ 2100
-  level = (level<0) ? 0 : ((level>100) ? 100 : level); 
+  level = (level<0) ? 0 : ((level>100) ? 100 : level);
   return level;
 }
 
@@ -62,7 +62,7 @@ static void hardware_polled_cb(lv_timer_t * timer) {
       delay(200);
       SD.end();
     } else {
-      lv_obj_clear_state(tf_state, LV_STATE_CHECKED); 
+      lv_obj_clear_state(tf_state, LV_STATE_CHECKED);
     }
     lv_label_set_text_fmt(battery_label, "%"LV_PRId32"%", battery_level_percent());
 }
@@ -84,14 +84,14 @@ void lv_hardware_test(void)
     lv_label_set_text(slider_label, "0");
     lv_obj_align_to(slider_label, slider, LV_ALIGN_OUT_TOP_MID, 0, -15);
 
-    lv_obj_t * tf_label = lv_label_create(lv_scr_act());
-    lv_label_set_text(tf_label, "tf-card");
-    lv_obj_set_pos(tf_label, 90, 170);
-    lv_obj_t * tf_state = lv_switch_create(lv_scr_act());
-    lv_obj_set_pos(tf_state, 90, 190);
-    lv_obj_add_state(tf_state, LV_STATE_CHECKED | LV_STATE_DISABLED);
-    lv_obj_add_event_cb(tf_state, event_handler, LV_EVENT_ALL, NULL);
-    lv_timer_create(hardware_polled_cb, 7000, tf_state);
+//    lv_obj_t * tf_label = lv_label_create(lv_scr_act());
+//    lv_label_set_text(tf_label, "tf-card");
+//    lv_obj_set_pos(tf_label, 90, 170);
+//    lv_obj_t * tf_state = lv_switch_create(lv_scr_act());
+//    lv_obj_set_pos(tf_state, 90, 190);
+//    lv_obj_add_state(tf_state, LV_STATE_CHECKED | LV_STATE_DISABLED);
+//    lv_obj_add_event_cb(tf_state, event_handler, LV_EVENT_ALL, NULL);
+//    lv_timer_create(hardware_polled_cb, 7000, tf_state);
 
     rtc.begin();
     I2C_BM8563_TimeTypeDef tStruct;
